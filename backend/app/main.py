@@ -9,8 +9,8 @@ app = FastAPI(
     version="1.0.0"
 )
 Base.metadata.create_all(bind=engine)
-app.incluide_router(materias.router)
+app.include_router(materias.router)
 
 @app.get("/")
 def root():
-    return {"mensaje": "Universidad Digital API funcionando"}
+    return {"mensaje": "Funcionaaaaa"}
