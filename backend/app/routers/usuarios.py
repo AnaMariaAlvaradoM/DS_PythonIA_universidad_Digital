@@ -23,22 +23,18 @@ from app.auth import (
 
 router = APIRouter(
     prefix="/usuarios",
-
     tags=["Usuarios"],
-
 )
 
 @router.post(
     "/registro",
     response_model=UsuarioResponse,
-
     status_code=status.HTTP_201_CREATED,
 
 )
 def registrar_usuario(datos: UsuarioCreate, db: Session = Depends(get_db)):
 
     usuario_existente = db.query(Usuario).filter(Usuario.email == datos.email).first()
-
     if usuario_existente:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -46,18 +42,15 @@ def registrar_usuario(datos: UsuarioCreate, db: Session = Depends(get_db)):
         )
 
     password_seguro = hashear_password(datos.password)
-
     nuevo_usuario = Usuario(
         nombre=datos.nombre,
         email=datos.email,
         password_hash=password_seguro,
- 
         rol=datos.rol,
-  
+
     )
 
     db.add(nuevo_usuario)
-
     db.commit()
     db.refresh(nuevo_usuario)
 
@@ -76,31 +69,20 @@ def login(datos: UsuarioLogin, db: Session = Depends(get_db)):
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-
     if not verificar_password(datos.password, usuario.password_hash):
-
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-           
             headers={"WWW-Authenticate": "Bearer"},
         )
-
     tiempo_expiracion = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-
     token = crear_token(
         data={
             "sub": usuario.email,
-
             "rol": usuario.rol,
-
-
             "id": usuario.id,
-
         },
         expires_delta=tiempo_expiracion,
     )
-
-
     return {
         "access_token": token,
         "token_type": "bearer",
@@ -109,13 +91,11 @@ def login(datos: UsuarioLogin, db: Session = Depends(get_db)):
 
 @router.get("/perfil", response_model=UsuarioResponse)
 def ver_perfil(usuario_actual: Usuario = Depends(get_usuario_actual)):
-
     return usuario_actual
 
 @router.get("/", response_model=list[UsuarioResponse])
 def listar_usuarios(
     admin: Usuario = Depends(get_admin_actual),
-
     db: Session = Depends(get_db),
 ):
 
