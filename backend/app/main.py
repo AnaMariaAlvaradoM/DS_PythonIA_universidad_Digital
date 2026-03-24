@@ -4,7 +4,7 @@ from app.database import engine, Base
 
 from app.models import usuario, materia, inscripcion, calificacion
 
-from app.routers import materias, usuarios
+from app.routers import materias, usuarios, inscripciones
 
 app = FastAPI(
     title="Universidad Digital API",
@@ -24,6 +24,7 @@ Base.metadata.create_all(bind=engine)
 
 app.include_router(materias.router)
 app.include_router(usuarios.router)
+app.include_router(inscripciones.router)
 
 @app.get("/", tags=["Raíz"])
 def root():

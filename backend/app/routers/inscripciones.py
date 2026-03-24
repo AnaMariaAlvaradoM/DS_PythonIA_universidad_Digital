@@ -47,7 +47,6 @@ def crear_inscripcion(
             detail=f"No se encontró una materia con id {datos.materia_id}.",
         )
 
-
     inscripcion_existente = db.query(Inscripcion).filter(
         Inscripcion.usuario_id == datos.usuario_id,
         Inscripcion.materia_id == datos.materia_id,
