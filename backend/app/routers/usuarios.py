@@ -30,7 +30,6 @@ router = APIRouter(
     "/registro",
     response_model=UsuarioResponse,
     status_code=status.HTTP_201_CREATED,
-
 )
 def registrar_usuario(datos: UsuarioCreate, db: Session = Depends(get_db)):
 
