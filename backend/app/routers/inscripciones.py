@@ -92,7 +92,7 @@ def ver_mis_materias(
         resultado.append(InscripcionDetalle(
             id=inscripcion.id,
             periodo=inscripcion.periodo,
-            fecha_inscripcion=inscripcion.fecha_inscripcion,
+           # fecha_inscripcion=inscripcion.fecha_inscripcion,
             nombre_materia=materia.nombre if materia else None,
             creditos_materia=materia.creditos if materia else None,
         ))
