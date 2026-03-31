@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { AuthProvider }          from './context/AuthContext';
 
-
 import PrivateRoute              from './components/PrivateRoute';
 import Login                    from './pages/Login';
 import DashboardAdmin           from './pages/DashboardAdmin';
