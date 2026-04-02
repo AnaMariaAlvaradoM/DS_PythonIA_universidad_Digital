@@ -20,6 +20,8 @@ class UsuarioUpdate(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    rol: str
+    usuario_id: int
     
 class UsuarioResponse(BaseModel):
     id: int

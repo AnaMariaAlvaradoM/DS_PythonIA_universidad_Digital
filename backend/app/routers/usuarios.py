@@ -85,7 +85,8 @@ def login(datos: UsuarioLogin, db: Session = Depends(get_db)):
     return {
         "access_token": token,
         "token_type": "bearer",
-
+        "rol": usuario.rol,
+        "usuario_id": usuario.id
     }
 
 @router.get("/perfil", response_model=UsuarioResponse)
